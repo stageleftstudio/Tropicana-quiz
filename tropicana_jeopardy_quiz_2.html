@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forbidden Kiss: Tropicana! — Pre-Show Quiz</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Georgia, serif; background: #1a0a2e; color: #f0e6ff; min-height: 100vh; display: flex; justify-content: center; padding: 2rem 1rem; }
+  .wrap { width: 100%; max-width: 640px; }
+  .board-title { text-align: center; font-size: 26px; font-weight: bold; color: #ffd700; margin-bottom: 0.25rem; letter-spacing: 0.02em; }
+  .board-sub { text-align: center; font-size: 14px; color: #c9a8ff; margin-bottom: 1.75rem; }
+  .score-bar { display: flex; justify-content: center; gap: 3rem; margin-bottom: 1.5rem; }
+  .score-label { font-size: 11px; color: #c9a8ff; text-transform: uppercase; letter-spacing: 0.08em; text-align: center; }
+  .score-val { font-size: 26px; font-weight: bold; color: #ffd700; text-align: center; }
+  .clue-card { background: #2a1045; border: 1px solid #6a3a9a; border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; }
+  .clue-num { font-size: 11px; color: #c9a8ff; margin-bottom: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .clue-text { font-size: 17px; color: #f0e6ff; line-height: 1.65; margin-bottom: 1.1rem; font-style: italic; }
+  .choices { display: flex; flex-direction: column; gap: 9px; }
+  .choice-btn { background: #3a1560; border: 1px solid #7a4aaa; border-radius: 8px; padding: 11px 15px; font-size: 15px; font-family: Georgia, serif; color: #f0e6ff; cursor: pointer; text-align: left; transition: background 0.15s; }
+  .choice-btn:hover:not(:disabled) { background: #4a1f78; }
+  .choice-btn.correct { background: #1a4a2a; border-color: #4aaa6a; color: #9affc0; }
+  .choice-btn.wrong { background: #4a1a1a; border-color: #aa4a4a; color: #ffaaaa; }
+  .choice-btn.revealed { background: #1a4a2a; border-color: #4aaa6a; color: #9affc0; }
+  .choice-btn:disabled { cursor: default; }
+  .feedback { margin-top: 1rem; font-size: 14px; color: #e0c8ff; line-height: 1.65; min-height: 1.4rem; border-top: 1px solid #4a2a6a; padding-top: 0.75rem; }
+  .feedback.hidden { display: none; }
+  .nav-row { display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem; }
+  .nav-btn { background: transparent; border: 1px solid #7a4aaa; border-radius: 8px; padding: 9px 20px; font-size: 14px; font-family: Georgia, serif; color: #c9a8ff; cursor: pointer; }
+  .nav-btn:hover:not(:disabled) { background: #3a1560; }
+  .nav-btn:disabled { opacity: 0.3; cursor: default; }
+  .progress-dots { display: flex; gap: 7px; }
+  .dot { width: 11px; height: 11px; border-radius: 50%; background: #4a2a6a; transition: background 0.2s; }
+  .dot.active { background: #c9a8ff; }
+  .dot.done-right { background: #4aaa6a; }
+  .dot.done-wrong { background: #aa4a4a; }
+  .final-card { text-align: center; padding: 2.5rem 1rem; }
+  .final-score { font-size: 48px; font-weight: bold; color: #ffd700; margin: 1rem 0 0.5rem; }
+  .final-msg { font-size: 17px; color: #e0c8ff; margin-bottom: 1.75rem; line-height: 1.6; }
+  .restart-btn { background: transparent; border: 1px solid #7a4aaa; border-radius: 8px; padding: 11px 28px; font-size: 15px; font-family: Georgia, serif; color: #c9a8ff; cursor: pointer; }
+  .restart-btn:hover { background: #3a1560; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<script>
+/* ============================================================
+   EDIT YOUR QUIZ CONTENT HERE — nothing below needs changing
+   ============================================================
+
+   HOW IT WORKS:
+   - Each clue has: value, category, clue text, 4 choices, correct answer index, and feedback for each choice.
+   - "correct" is the INDEX of the right answer in the choices array (0 = first, 1 = second, 2 = third, 3 = fourth).
+   - "feedback" is an array of 4 responses — one for each choice, in the same order as choices.
+   - The show title and subtitle can be changed below too.
+
+   ============================================================ */
+
+const SHOW_TITLE    = "🌴 Forbidden Kiss: Tropicana! 🌴";
+const SHOW_SUBTITLE = 'Tonight\'s Pre-Show Warm-Up — "What is… The Tropicana?"';
+
+const clues = [
+
+  /* ── CLUE 1 ── */
+  {
+    value:    200,
+    category: "Going Out With a Bang",
+    clue:     "On October 9, 2024, this iconic Las Vegas resort did what every showgirl fears most — dropped everything at once, going out not with a whimper but with a very dramatic implosion.",
+    choices: [
+      "What is the Stardust?",
+      "What is the Riviera?",
+      "What is the Tropicana Las Vegas?",
+      "What is the Sands?"
+    ],
+    correct: 2,
+    feedback: [
+      "Honey, the Stardust came down in 2007 — you're 17 years off. That's not fashionably late, that's just late.",
+      "The Riviera was demolished in 2016, darling. Close in spirit, but no cigar — and in this crowd, no cigar means something.",
+      "Correct! The Tropicana Las Vegas was imploded on October 9, 2024, ending its 67-year run. A new baseball stadium for the Oakland A's is planned for the site — because apparently Vegas needed more balls.",
+      "The Sands fell in 1996 — Frank Sinatra wept. Try again, Rat Pack groupie."
+    ]
+  },
+
+  /* ── CLUE 2 ── */
+  {
+    value:    400,
+    category: "I Love Lucy… and Her Husband's Club",
+    clue:     "Ricky Ricardo — the man whose catchphrase was essentially 'you have some explaining to do, in bed' — waved his baton as bandleader at this fictional Havana-themed Manhattan nightspot.",
+    choices: [
+      "What is the Copa Cabana?",
+      "What is the Tropicana Club?",
+      "What is El Morocco?",
+      "What is the Blue Parrot?"
+    ],
+    correct: 1,
+    feedback: [
+      "The Copacabana is real, sugar, and Barry Manilow already wrote the song. Ricky never worked there — wrong club, wrong century.",
+      "Sí, sí! The Tropicana Club was Ricky's fictional venue on 'I Love Lucy.' Lucy's attempts to sneak into the act caused more chaos than a burlesque quick-change gone wrong.",
+      "El Morocco was a real jazz haunt, very chic — but Ricky Ricardo never set foot in it. You're thinking too uptown, darling.",
+      "The Blue Parrot is from Casablanca, not Havana. Different tropical fantasy entirely, sweetheart."
+    ]
+  },
+
+  /* ── CLUE 3 ── */
+  {
+    value:    600,
+    category: "Mob, Mambo & Mayhem",
+    clue:     "While tourists sipped daiquiris and watched the floor show, this Tampa-based mob boss — who had more skeletons than a rumba line has hip shakes — ran the real entertainment at Havana's glittering Tropicana.",
+    choices: [
+      "Who is Carlos Marcello?",
+      "Who is Meyer Lansky?",
+      "Who is Sam Giancana?",
+      "Who is Santo Trafficante Jr.?"
+    ],
+    correct: 3,
+    feedback: [
+      "Marcello ran New Orleans, not Havana — different corrupt paradise entirely. Close mob family, wrong dance floor.",
+      "Lansky was the money man behind Havana's Hotel Nacional — fingers everywhere, but the Tropicana's floor show belonged to Trafficante.",
+      "Giancana was Chicago's boss — he preferred a different kind of nightlife. Havana wasn't his turf, though lord knows he had plenty of it.",
+      "Hot tamales! Trafficante controlled gambling at Havana's Tropicana before Castro shut the party down in 1959. He later turned up in CIA-Mafia assassination plots. Now THAT's a floor show."
+    ]
+  },
+
+  /* ── CLUE 4 ── */
+  {
+    value:    800,
+    category: "Stars, Sequins & Skimpy Costumes",
+    clue:     "Before Vegas glitter, there was THIS Havana cabaret — opened in 1939 beneath the stars — whose open-air stage became the blueprint for every feather-and-fanny spectacular that followed.",
+    choices: [
+      "What is the Montmartre Club?",
+      "What is the Sans Souci?",
+      "What is Cabaret Parisien?",
+      "What is Tropicana Havana — 'Paradise Under the Stars'?"
+    ],
+    correct: 3,
+    feedback: [
+      "The Montmartre was a real Havana hotspot — Nat King Cole played there — but it didn't open in 1939 or claim the 'Paradise Under the Stars' crown. Good guess, wrong feathers.",
+      "Sans Souci was another mob-linked Havana casino — lovely, louche — but it didn't become the blueprint for the feathered spectacular. That honor belongs to somewhere more… tropical.",
+      "Cabaret Parisien is real and still running at the Hotel Nacional! But it opened much later and never claimed the tiara of the original outdoor spectacle.",
+      "Ole! Tropicana Havana opened in 1939 as an outdoor paradise with elaborately costumed performers under the Cuban sky. Still running today — it inspired every sequined showroom that came after, including tonight's."
+    ]
+  },
+
+  /* ── CLUE 5 ── */
+  {
+    value:    1000,
+    category: "Wet Money",
+    clue:     "The Tropicana Las Vegas was the only casino on the Strip where you could lose your shirt, your shorts, and your dignity without ever leaving the pool — thanks to these waterlogged one-armed bandits.",
+    choices: [
+      "What are underwater slot machines?",
+      "What are waterproof poker tables?",
+      "What are swim-up blackjack tables?",
+      "What are floating roulette wheels?"
+    ],
+    correct: 0,
+    feedback: [
+      "Correct! The Tropicana pool famously had slot machines right in the water, so guests could gamble in their swimsuits without missing a single pull. Finally — a place where it's perfectly acceptable to lose everything while wet, half-naked, and slightly pruney. The Tropicana: setting the bar for dignity since 1957.",
+      "A fine idea, but no — the Trop's aquatic innovation was strictly slots. You had to be dry to lose at poker.",
+      "Swim-up blackjack exists elsewhere on the Strip today, but the Trop's pool claim to fame was strictly the one-armed variety.",
+      "Floating roulette would require a steadier hand than most Vegas guests possess after the third daiquiri. Wrong, but we respect the vision."
+    ]
+  }
+
+];
+
+/* ============================================================
+   END OF EDITABLE SECTION — do not change anything below here
+   ============================================================ */
+
+let current = 0;
+let answered = new Array(clues.length).fill(null);
+let score = 0;
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelector('.board-title').textContent = SHOW_TITLE;
+  document.querySelector('.board-sub').textContent = SHOW_SUBTITLE;
+  render();
+});
+
+function render() {
+  const area = document.getElementById('quiz-area');
+  if (current >= clues.length) { renderFinal(area); return; }
+  const q = clues[current];
+  const ans = answered[current];
+
+  const feedbackText = ans !== null ? q.feedback[ans] : '';
+  const feedbackHidden = ans === null ? 'hidden' : '';
+
+  area.innerHTML =
+    '<div class="clue-card">' +
+      '<div class="clue-num">CLUE ' + (current+1) + ' &bull; $' + q.value + ' &bull; ' + q.category + '</div>' +
+      '<div class="clue-text">&ldquo;' + q.clue + '&rdquo;</div>' +
+      '<div class="choices">' +
+        q.choices.map(function(c, i) {
+          var cls = 'choice-btn';
+          if (ans !== null) {
+            if (i === q.correct) cls += ' revealed';
+            else if (i === ans) cls += ' wrong';
+          }
+          var disabled = ans !== null ? 'disabled' : '';
+          return '<button class="' + cls + '" ' + disabled + ' onclick="pick(' + i + ')">' + c + '</button>';
+        }).join('') +
+      '</div>' +
+      '<div class="feedback ' + feedbackHidden + '">' + feedbackText + '</div>' +
+    '</div>';
+
+  document.getElementById('score-disp').textContent = '$' + score;
+  document.getElementById('q-disp').textContent = (current+1) + ' / ' + clues.length;
+  updateDots();
+
+  var prev = document.getElementById('prev-btn');
+  var next = document.getElementById('next-btn');
+  prev.disabled = current === 0;
+
+  if (current === clues.length - 1 && ans !== null) {
+    next.textContent = 'results \u2192';
+    next.onclick = function() { current++; render(); };
+    next.disabled = false;
+  } else {
+    next.textContent = 'next \u2192';
+    next.onclick = function() { navigate(1); };
+    next.disabled = (ans === null && current === clues.length - 1);
+  }
+}
+
+function pick(i) {
+  if (answered[current] !== null) return;
+  answered[current] = i;
+  if (i === clues[current].correct) score += clues[current].value;
+  render();
+}
+
+function navigate(dir) {
+  current = Math.max(0, Math.min(clues.length - 1, current + dir));
+  render();
+}
+
+function updateDots() {
+  var dots = document.getElementById('dots');
+  dots.innerHTML = clues.map(function(_, i) {
+    var cls = 'dot';
+    if (i === current) cls += ' active';
+    else if (answered[i] !== null) cls += answered[i] === clues[i].correct ? ' done-right' : ' done-wrong';
+    return '<div class="' + cls + '"></div>';
+  }).join('');
+}
+
+function renderFinal(area) {
+  var total = clues.reduce(function(a, q) { return a + q.value; }, 0);
+  var pct = score / total;
+  var msgs = [
+    [0.8, "You know your Tropicanas, darling. Front-row seat for you tonight! 🌴"],
+    [0.5, "Not bad, hot stuff. You clearly know your way around a sequined venue. 💃"],
+    [0.2, "You showed up — and in THIS crowd, that's half the battle. 🍹"],
+    [-1,  "Honey, you're here for the show, not the history lesson. We love you anyway. 🪶"]
+  ];
+  var msg = msgs.find(function(m) { return pct > m[0]; })[1];
+
+  area.innerHTML =
+    '<div class="clue-card final-card">' +
+      '<div style="font-size:44px;">🌴</div>' +
+      '<div class="final-score">$' + score + '</div>' +
+      '<div class="final-msg">' + msg + '</div>' +
+      '<button class="restart-btn" onclick="restart()">play again &#x21BA;</button>' +
+    '</div>';
+
+  document.getElementById('q-disp').textContent = '\u2713 done';
+  document.getElementById('prev-btn').disabled = true;
+  document.getElementById('next-btn').disabled = true;
+  updateDots();
+}
+
+function restart() {
+  current = 0;
+  answered = new Array(clues.length).fill(null);
+  score = 0;
+  render();
+}
+</script>
+
+<h2 class="sr-only">Forbidden Kiss Tropicana Pre-Show Quiz</h2>
+<div class="board-title">🌴 Forbidden Kiss: Tropicana! 🌴</div>
+<div class="board-sub">Tonight's Pre-Show Warm-Up — "What is… The Tropicana?"</div>
+
+<div class="score-bar">
+  <div class="score-box">
+    <div class="score-label">Score</div>
+    <div class="score-val" id="score-disp">$0</div>
+  </div>
+  <div class="score-box">
+    <div class="score-label">Question</div>
+    <div class="score-val" id="q-disp">1 / 5</div>
+  </div>
+</div>
+
+<div id="quiz-area"></div>
+
+<div class="nav-row">
+  <button class="nav-btn" id="prev-btn" onclick="navigate(-1)">&larr; prev</button>
+  <div class="progress-dots" id="dots"></div>
+  <button class="nav-btn" id="next-btn" onclick="navigate(1)">next &rarr;</button>
+</div>
+
+</div>
+</body>
+</html>
